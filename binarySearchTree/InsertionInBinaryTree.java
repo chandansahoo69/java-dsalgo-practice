@@ -1,5 +1,6 @@
 package binarySearchTree;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 class Node{
@@ -315,38 +316,97 @@ public class InsertionInBinaryTree {
 		BSTtoGreaterSumTreeUtil(root.left, o);
 	}
 	
-	LinkedList head;
-	
-	static void push(int data) {
-		InsertionInBinaryTree o = new InsertionInBinaryTree();
-		LinkedList newNode = new LinkedList(data);
-		newNode.next = o.head;
-		o.head = newNode;
+	Node BSTfromPreOrder(int a[]) {
+		K o = new K();
+		o.k = 0;
+		int size = a.length;
+		return BSTfromPreOrderUtil(a,size,Integer.MIN_VALUE,Integer.MAX_VALUE,o);
 	}
 	
-	class List{
-		InsertionInBinaryTree o = new InsertionInBinaryTree();
-		LinkedList node = new LinkedList();
-	}
-	
-	static Node LinkedListToBalancedBST(LinkedList head) {
-		InsertionInBinaryTree o = new InsertionInBinaryTree();
-		return LinkedListToBalancedBSTUtil(o.head, 5);
-	}
-	static Node LinkedListToBalancedBSTUtil(InsertionInBinaryTree o, int n) {
-		if(n == 0)
+	static Node BSTfromPreOrderUtil(int a[],int size,int l,int r,K o) {
+		if(l > r)
 			return null;
-		
-		Node root = new Node();
-		root.left = LinkedListToBalancedBSTUtil(o, n/2);
-		
-		root.data = o.head.data;
-		o.head = o.head.next;
-		
-		root.right = LinkedListToBalancedBSTUtil(o, n/2);
-		
+		if(o.k >= size)
+			return null;
+		if(a[o.k] < l || a[o.k] > r)
+			return null;
+		//make a node first bcz pre = NLR
+		Node root = new Node(a[o.k]);
+		//store the value of node to use in range
+		int x = a[o.k];
+		//increment the ptr 
+		o.k++;
+		//call the left and right tree
+		root.left = BSTfromPreOrderUtil(a,size,l,x-1,o);
+		root.right = BSTfromPreOrderUtil(a,size,x+1,r,o);
+		//then return the root
 		return root;
 	}
+	
+//	class C{
+//		ArrayList<Integer> a = new ArrayList<>();
+//	}
+//	
+//	ArrayList<Integer> PreOrderToPostOrderUtil(int pre[]) {
+//		C o = new C();
+//		PreOrderToPostOrder(pre, 0, pre.length - 1, o);
+//		return o.a;
+//	}
+//	
+//	static int nextGreater(int pre[], int l, int r) {
+//		int i;
+//		for (i = r; i > l; i--) {
+//			if(pre[i] < pre[r])
+//				return i;
+//		}
+//		return i;
+//	}
+//	
+//	static void PreOrderToPostOrder(int pre[], int l, int r, C o) {
+//		if(l > r)
+//			return ;
+//				
+//		int g = nextGreater(pre, l, r);
+//		
+//		o.a.add(pre[l]);
+//		
+//		PreOrderToPostOrder(pre, l, g, o);
+//		PreOrderToPostOrder(pre, g+1, r-1, o);		
+//		
+//	}
+	
+//	LinkedList head;
+//	
+//	static void push(int data) {
+//		InsertionInBinaryTree o = new InsertionInBinaryTree();
+//		LinkedList newNode = new LinkedList(data);
+//		newNode.next = o.head;
+//		o.head = newNode;
+//	}
+//	
+//	class List{
+//		InsertionInBinaryTree o = new InsertionInBinaryTree();
+//		LinkedList node = new LinkedList();
+//	}
+	
+//	static Node LinkedListToBalancedBST(LinkedList head) {
+//		InsertionInBinaryTree o = new InsertionInBinaryTree();
+//		return LinkedListToBalancedBSTUtil(o.head, 5);
+//	}
+//	static Node LinkedListToBalancedBSTUtil(InsertionInBinaryTree o, int n) {
+//		if(n == 0)
+//			return null;
+//		
+//		Node root = new Node();
+//		root.left = LinkedListToBalancedBSTUtil(o, n/2);
+//		
+//		root.data = o.head.data;
+//		o.head = o.head.next;
+//		
+//		root.right = LinkedListToBalancedBSTUtil(o, n/2);
+//		
+//		return root;
+//	}
 	
 //	static void kthLargestElement(Node root, int k , )
 	
@@ -445,15 +505,26 @@ public class InsertionInBinaryTree {
 //		 o.BSTtoGreaterSumTree(root);
 //		 inOrder(root);
 		 
-		 push(1);
-		 push(2);
-		 push(3);
-		 push(4);
-		 push(5);
+//		 push(1);
+//		 push(2);
+//		 push(3);
+//		 push(4);
+//		 push(5);
 		 
-		 InsertionInBinaryTree o = new InsertionInBinaryTree();
-		 Node root = LinkedListToBalancedBST(o.head);
-		 inOrder(root);
+//		 InsertionInBinaryTree o = new InsertionInBinaryTree();
+//		 Node root = LinkedListToBalancedBST(o.head);
+//		 inOrder(root);
+		
+//		int a[] = {1, 2 , 3, 4, 5};
+//		InsertionInBinaryTree o = new InsertionInBinaryTree();
+//		ArrayList<Integer> c = new ArrayList<>();
+//		c = o.PreOrderToPostOrderUtil(a);
+//		System.out.println(c);
+		 
+		int a[] = {40, 30, 35, 45, 60, 65};
+		InsertionInBinaryTree o = new InsertionInBinaryTree();
+		Node temp1 = o.BSTfromPreOrder(a);
+		inOrder(temp1);
 	}
 
 }
