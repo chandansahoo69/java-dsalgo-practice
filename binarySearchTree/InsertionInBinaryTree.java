@@ -343,6 +343,30 @@ public class InsertionInBinaryTree {
 		return root;
 	}
 	
+	Node BSTfromPostOrder(int a[]) {
+		K o = new K();
+		o.k = a.length - 1;
+		return BSTfromPostOrderUtil(a,Integer.MIN_VALUE,Integer.MAX_VALUE,o);
+	}
+	
+	static Node BSTfromPostOrderUtil(int a[], int l, int r, K o) {
+		if(l>r)
+			return null;
+		if(o.k < 0)
+			return null;
+		if(a[o.k] < l || a[o.k] > r)
+			return null;
+		
+		int x = a[o.k];
+		Node root = new Node(a[o.k]);
+		o.k--;
+		root.left = BSTfromPostOrderUtil(a, l, x-1, o);
+		root.right = BSTfromPostOrderUtil(a, x+1, r, o);
+		
+		return root;
+		
+	}
+	
 //	class C{
 //		ArrayList<Integer> a = new ArrayList<>();
 //	}
@@ -523,8 +547,11 @@ public class InsertionInBinaryTree {
 		 
 		int a[] = {40, 30, 35, 45, 60, 65};
 		InsertionInBinaryTree o = new InsertionInBinaryTree();
-		Node temp1 = o.BSTfromPreOrder(a);
-		inOrder(temp1);
+//		Node temp1 = o.BSTfromPreOrder(a);
+//		inOrder(temp1);
+		
+		Node temp2 = o.BSTfromPostOrder(a);
+		inOrder(temp2);
 	}
 
 }
