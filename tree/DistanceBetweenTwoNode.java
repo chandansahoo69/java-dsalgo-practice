@@ -4,12 +4,11 @@ public class DistanceBetweenTwoNode {
 	
 	static Tree root;
 	
-	//LowestCommonAncestor
-	
 	static int distanceBetweenTwoNodes(Tree root, int a, int b) {
 		Tree lca = LowestCommonAncestor.LowestCommonAnsector(root, a, b);
 		if(lca == null)
 			return -1;
+		//we have to find the distance from the lca to the elm a and b
 		int dis = distance(lca, a, 0) + distance(lca, b, 0);
 		return dis;
 	}
@@ -19,13 +18,14 @@ public class DistanceBetweenTwoNode {
 			return -1;
 		if(root.data == s)
 			return dis;
+		//search in left side 
 		int d = distance(root.left,s, dis+1);
-		
+		//if find then return 
 		if(d != -1)
 			return d;
-		
+		//else find in right part
 		d = distance(root.right,s, dis+1);
-		
+		//return the right part
 		return d;
 	}
 
