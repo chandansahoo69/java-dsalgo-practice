@@ -1,6 +1,6 @@
 package binarySearchTree;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Arrays;
 
 class Node{
@@ -367,6 +367,30 @@ public class InsertionInBinaryTree {
 		
 	}
 	
+	static Node LowestCommonAnsector(Node root, int a, int b) {
+		//base case
+		if(root == null)
+			return root;
+		//it will handel two cases lfskewtree 2-3 and 
+		//rtskewtree 2-3 
+		if(root.data == a || root.data == b)
+			return root;
+		
+		Node l = LowestCommonAnsector(root.left, a, b);
+		Node r = LowestCommonAnsector(root.right, a, b);
+		//if a and b are in both the part then it handeled in this
+		if(l != null && r != null)
+			return root;
+		//if it present at left tree then return
+		if(l != null)
+			return l;
+		//if it present at right tree then return 
+		if(r != null)
+			return r;
+		//unless return null if no one is present
+		return null;
+	}
+	
 //	class C{
 //		ArrayList<Integer> a = new ArrayList<>();
 //	}
@@ -461,16 +485,14 @@ public class InsertionInBinaryTree {
 //		return root;
 //	}
 	public static void main(String[] args) {
-//		 Node root = null;
-//		 root = insert(root, 12);
-//		 root = insert(root, 9);
-//		 root = insert(root, 10);
-//		 root = insert(root, 8);
-//		 root = insert(root, 13);
-//		 root = insert(root, 14);
-//		 root = insert(root, 15);
-//		 root = insert(root, 14);
-//		 root = insert(root, 13);
+		 Node root = null;
+		 root = insert(root, 12);
+		 root = insert(root, 9);
+		 root = insert(root, 10);
+		 root = insert(root, 8);
+		 root = insert(root, 13);
+		 root = insert(root, 14);
+		 root = insert(root, 15);
 		 		 
 		 //print the inorder value
 //		 inOrder(root);
@@ -545,13 +567,22 @@ public class InsertionInBinaryTree {
 //		c = o.PreOrderToPostOrderUtil(a);
 //		System.out.println(c);
 		 
-		int a[] = {40, 30, 35, 45, 60, 65};
-		InsertionInBinaryTree o = new InsertionInBinaryTree();
-//		Node temp1 = o.BSTfromPreOrder(a);
-//		inOrder(temp1);
+		//Bst construction form pre and post
+//		int a[] = {40, 30, 35, 45, 60, 65};
+//		InsertionInBinaryTree o = new InsertionInBinaryTree();
+////		Node temp1 = o.BSTfromPreOrder(a);
+////		inOrder(temp1);
+//		
+//		Node temp2 = o.BSTfromPostOrder(a);
+//		inOrder(temp2);
 		
-		Node temp2 = o.BSTfromPostOrder(a);
-		inOrder(temp2);
+		//LowestCommonAnsector in binary tree
+		
+		Node n = LowestCommonAnsector(root, 12, 14);
+		if(n == null)
+			System.out.println("LowestCommonAnsector dosent exist");
+		else
+			System.out.println(n.data);
 	}
 
 }
