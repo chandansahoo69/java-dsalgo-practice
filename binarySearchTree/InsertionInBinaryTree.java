@@ -391,6 +391,20 @@ public class InsertionInBinaryTree {
 		return null;
 	}
 	
+	static int distanceBetweenTwoNodes(Node root, int a, int b) {
+		Node lca = LowestCommonAnsector(root, a, b);
+		int dis = distance(lca, a) + distance(lca, b);
+		return dis;
+	}
+	
+	static int distance(Node root, int s) {
+		if(root == null)
+			return -1;
+		if(root.data == s)
+			return 1;
+		return 1 + distance(root.left,s) + distance(root.right,s);
+	}
+	
 //	class C{
 //		ArrayList<Integer> a = new ArrayList<>();
 //	}
@@ -578,11 +592,14 @@ public class InsertionInBinaryTree {
 		
 		//LowestCommonAnsector in binary tree
 		
-		Node n = LowestCommonAnsector(root, 12, 14);
-		if(n == null)
-			System.out.println("LowestCommonAnsector dosent exist");
-		else
-			System.out.println(n.data);
+//		Node n = LowestCommonAnsector(root, 12, 14);
+//		if(n == null)
+//			System.out.println("LowestCommonAnsector dosent exist");
+//		else
+//			System.out.println(n.data);
+		
+		int m = distanceBetweenTwoNodes(root, 12, 15);
+		System.out.println(m);
 	}
 
 }

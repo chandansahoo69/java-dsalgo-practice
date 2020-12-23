@@ -7,11 +7,14 @@ public class DoubleTreeFormBinaryTree {
 	static void DoubleTree(Tree root) {
 		if(root == null)
 			return;
+		
 		DoubleTree(root.left);
 		DoubleTree(root.right);
-		
+		//create a node 
 		Tree newNode = new Tree(root.data);
+		//then point newnode left to the node left 
 		newNode.left = root.left;
+		//point the node left to newnode
 		root.left = newNode;
 	}
 

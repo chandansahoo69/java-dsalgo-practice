@@ -39,7 +39,7 @@ public class RootToLeafPathSum {
 		root.right.right = new Tree(7);
 		
 		RootToLeafPathSum o = new RootToLeafPathSum();
-		System.out.println(o.RootToLeafPath(root, 1));
+		System.out.println(o.RootToLeafPath(root, 8));
 		
 
 	}
