@@ -9,6 +9,10 @@ class Tree {
 		data = val;
 		left = right = null;
 	}
+	Tree(char val){
+		data = val;
+		left = right = null;
+	}
 }
 
 public class BinaryTree {

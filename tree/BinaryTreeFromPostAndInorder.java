@@ -15,16 +15,18 @@ public class BinaryTreeFromPostAndInorder {
 	static Tree constructBstUtil(int post[], int in[], int s, int e, i o) {
 		if(e<s)
 			return null;
-		
+		//create the node first
 		Tree root = new Tree(post[o.ptr]);
-		
+		//then find the elm of post in in array 
 		int mid = FindElmInInorder(in, s, e, post[o.ptr]);
-		
+		//then decrease the pointer 
 		o.ptr--;
-		
+		//create the right part bcz in post order (l R N) 
+		//the pointer is pointing to end of array when it decrease 
+		//it will first encounter with right so 
 		root.right = constructBstUtil(post,in,mid+1,e,o);
 		root.left = constructBstUtil(post,in,s,mid-1,o);
-		
+		//return the root
 		return root;
 	}
 	
