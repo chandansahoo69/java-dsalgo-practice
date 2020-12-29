@@ -12,14 +12,20 @@ public class DeserializationofBinaryTree {
 	}
 	
 	static Tree dsUtil(int ds[], ds o) {
+		//if you got -1 then we don't have to anything so return null 
+		//and move the pointer to the next
 		if(ds[o.ptr] == -1) {
 			o.ptr++;
 			return null;
 		}
+		//as in pre order create the root 
 		Tree root = new Tree(ds[o.ptr]);
+		//move the pointer to create the next node
 		o.ptr++;
+		//call the right and left part
 		root.left = dsUtil(ds, o);
 		root.right = dsUtil(ds, o);
+		//then return the root
 		return root;
 	}
 
