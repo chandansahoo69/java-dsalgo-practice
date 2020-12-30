@@ -281,9 +281,7 @@ public class InsertionInBinaryTree {
 		
 		return KthLargestElement(root.left, o);
 	}
-	
-//	static int sum1 = 0;
-	
+		
 	void BSTtoSumOfSmallerKeyUtil(Node root) {
 		K o = new K();
 		BSTtoSumOfSmallerKey(root, o);
@@ -389,6 +387,36 @@ public class InsertionInBinaryTree {
 			return r;
 		//unless return null if no one is present
 		return null;
+	}
+	
+	class p{
+		int level = 0;
+		int res = -1;
+	}
+	
+	int secindLargestElement(Node root) {
+		p o = new p();
+		secindLargestElementUtil(root, o);
+		return o.res;
+	}
+	
+	static void secindLargestElementUtil(Node root, p o) {
+		//the second condition is important to avoid unnecessary
+		//recursive calls
+		if(root == null || o.level >=2 )
+			return ;
+		//reverse in order traversal so that the largest element is 
+		//present at the right bottom
+		secindLargestElementUtil(root.right, o);
+		//increment the level 
+		o.level++;
+		//when level = 2 then that is the result so return 
+		if(o.level == 2) {
+			o.res = root.data;
+			return ;
+		}
+		
+		secindLargestElementUtil(root.left, o);
 	}
 
 	
@@ -584,6 +612,9 @@ public class InsertionInBinaryTree {
 //			System.out.println("LowestCommonAnsector dosent exist");
 //		else
 //			System.out.println(n.data);
+		 InsertionInBinaryTree o = new InsertionInBinaryTree();
+		 int n = o.secindLargestElement(root);
+		 System.out.println(n);
 		
 	}
 
